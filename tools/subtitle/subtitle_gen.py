@@ -238,7 +238,7 @@ class SubtitleGen(BaseTool):
                     lines.append(
                         f"{self._ts_srt(word_info['start'])} --> {self._ts_srt(word_info['end'])}"
                     )
-                    lines.append(escape(word_info["word"], quote=False))
+                    lines.append(word_info["word"])
                     lines.append("")
                     idx += 1
         elif highlight_style == "karaoke":
@@ -248,7 +248,7 @@ class SubtitleGen(BaseTool):
                 if not words:
                     lines.append(str(cue["index"]))
                     lines.append(f"{self._ts_srt(cue['start'])} --> {self._ts_srt(cue['end'])}")
-                    lines.append(escape(cue["text"], quote=False))
+                    lines.append(cue["text"])
                     lines.append("")
                     continue
                 for wi, word_info in enumerate(words):
@@ -259,16 +259,16 @@ class SubtitleGen(BaseTool):
                     parts = []
                     for wj, w in enumerate(words):
                         if wj == wi:
-                            parts.append(f"<b>{escape(w['word'], quote=False)}</b>")
+                            parts.append(f"<b>{w['word']}</b>")
                         else:
-                            parts.append(escape(w["word"], quote=False))
+                            parts.append(w["word"])
                     lines.append(" ".join(parts))
                     lines.append("")
         else:
             for cue in cues:
                 lines.append(str(cue["index"]))
                 lines.append(f"{self._ts_srt(cue['start'])} --> {self._ts_srt(cue['end'])}")
-                lines.append(escape(cue["text"], quote=False))
+                lines.append(cue["text"])
                 lines.append("")
         return "\n".join(lines)
 
